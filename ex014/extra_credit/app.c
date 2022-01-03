@@ -10,6 +10,9 @@
 // print_letters so it only processes this fixed length and doesn't rely on the
 // '\0' terminator.  You'll need the #include <string.h> for this.
 
+// Use man to look up information on isalpha and isblank.  Use other similar
+// functions to print out only digits or other characters.
+
 // forward declarations
 //int can_print_it(char ch);
 void print_letters(char arg[], int argLen);
@@ -31,6 +34,7 @@ void print_letters(char arg[], int argLen) {
         char ch = arg[i];
 
         if (isalpha(ch) || isblank(ch)) {
+        //if (isdigit(ch) || isblank(ch)) {
             printf("'%c' == %d ", ch, ch);
         }
     }
