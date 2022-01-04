@@ -5,8 +5,15 @@
 // data.  Remember you can declare a function to accept a pointer, but just use
 // it like an array.
 
-void ex_func_01(char **names_ptr, int *age_ptr) {
+void ex_func_01(char **names_ptr, int *age_ptr, int count) {
+    int i = 0;
 
+    printf("Using ex_func_01\n");
+
+    for (i = 0; i < count; i++) {
+        printf("%s is %d years old.\n", 
+                *(names_ptr + i), *(age_ptr + i));
+    }
 }
 
 int main(int argc, char *argv[]) {
@@ -32,10 +39,11 @@ int main(int argc, char *argv[]) {
     char **cur_name = names;
 
     // second way using pointers
-    for (i = 0; i < count; i++) {
-        printf("%s is %d years old.\n", 
-                *(cur_name + i), *(cur_age + i));
-    }
+    ex_func_01(cur_name, cur_age, count);
+    //for (i = 0; i < count; i++) {
+    //    printf("%s is %d years old.\n", 
+    //            *(cur_name + i), *(cur_age + i));
+    //}
 
     printf("---\n");
 
