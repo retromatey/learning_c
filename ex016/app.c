@@ -3,6 +3,18 @@
 #include <stdlib.h>
 #include <string.h>
 
+// What to the additional header files above provide?
+// - stdio.h:
+//   - printf: console output
+// - assert.h:
+//   - assert: conditional checks for development purposes
+// - stdlib.h: 
+//   - malloc: allocate memory for an object
+//   - free: deallocates a piece of memory
+// - string.h: 
+//   - NULL: the integer constant 0
+//   - strdup: ? not defined in my C reference book
+
 struct Person {
     char *name;
     int age;
