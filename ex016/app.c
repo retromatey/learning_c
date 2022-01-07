@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-// What to the additional header files above provide?
+// What do the additional header files above provide?
 // - stdio.h:
 //   - printf: console output
 // - assert.h:
@@ -15,6 +15,7 @@
 //   - NULL: the integer constant 0
 //   - strdup: ? not defined in my C reference book
 
+// Define a data structure for a Person with properties that define a person.
 struct Person {
     char *name;
     int age;
@@ -22,10 +23,19 @@ struct Person {
     int weight;
 };
 
+// This function will return a pointer to a Person data structure the the
+// properties of the Person data structure populated with the parameters passed
+// into the function.
 struct Person *Person_create(char *name, int age, int height, int weight) {
+    // Allocate memory for a Person data structure.
     struct Person *who = malloc(sizeof(struct Person));
+
+    // Check if the Person pointer was created properly. Abort operation if the
+    // pointer is equal to NULL.
     assert(who != NULL);
 
+    // Populate the Person properties with the args passed to this function.
+    // Perform a string copy of the name arg.
     who->name = strdup(name);
     who->age = age;
     who->height = height;
@@ -34,13 +44,19 @@ struct Person *Person_create(char *name, int age, int height, int weight) {
     return who;
 }
 
+// This function will deallocate the memory for a Person data structure.
 void Person_destroy(struct Person *who) {
+    // Check that the Person pointer arg is valid, abort operation if it is NULL
     assert(who != NULL);
 
+    // Deallocate the memory for the name string data
     free(who->name);
+
+    // Deallocate the memory for the Person data
     free(who);
 }
 
+// This function will print out the properties of a Person data structure.
 void Person_print(struct Person *who) {
     printf("Name: %s\n", who->name);
     printf("\tAge: %d\n", who->age);
