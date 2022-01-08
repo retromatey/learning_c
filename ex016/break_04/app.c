@@ -3,12 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Forget to call Person_destroy at the end, and then run it under the debugger
-// to see it report that you forgot to free the memory.  Figure out the options
-// you need to pass to the debugger to get it to print how you leaked this
-// memory.
-//
-// valgrind --leak-check=full ./app.exe 
+// Pass NULL to Person_print and see what the debugger thinks of that.  
 
 // What do the additional header files above provide?
 // - stdio.h:
@@ -78,7 +73,8 @@ int main(int argc, char *argv[]) {
 
     // print them out and where they are in memory
     printf("Joe is at memory location %p:\n", joe);
-    Person_print(joe);
+    //Person_print(joe);
+    Person_print(NULL);
 
     printf("Frank is at memory location %p:\n", frank);
     Person_print(frank);
@@ -94,8 +90,8 @@ int main(int argc, char *argv[]) {
     Person_print(frank);
 
     // destroy them both so we clean up
-    //Person_destroy(joe);
-    //Person_destroy(frank);
+    Person_destroy(joe);
+    Person_destroy(frank);
 
     return 0;
 }
