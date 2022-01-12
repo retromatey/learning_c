@@ -7,6 +7,19 @@
 #define MAX_DATA 512
 #define MAX_ROWS 100
 
+// - FILE?
+//   - stdio.h
+//   - desciption: 
+// errno?
+// perror()?
+// fread()?
+// fopen()?
+// fclose()?
+// fwrite()?
+// fflush()?
+// strncpy()?
+// atoi()?
+
 struct Address {
     int id;
     int set;
