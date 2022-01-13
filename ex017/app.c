@@ -7,18 +7,31 @@
 #define MAX_DATA 512
 #define MAX_ROWS 100
 
-// - FILE?
+// - FILE
 //   - stdio.h
-//   - desciption: 
-// errno?
-// perror()?
-// fread()?
-// fopen()?
-// fclose()?
-// fwrite()?
-// fflush()?
-// strncpy()?
-// atoi()?
+//   - A data type that holds info about a stream.  An object of type FILE is
+//     created by calling fopen().
+//
+// - fopen()
+//   - stdio.h
+//   - Returns a pointer of type FILE* for input/ouput.  If there is an error, a
+//     null pointer is returned and an error code is stored to errno.
+//
+// - fclose()
+//   - stdio.h
+//   - Closes an open stream, emptys internal data buffers.  Returns zero on
+//     success, EOF if an error is detected.
+//
+// - fread()?
+//
+// - fwrite()?
+//
+// - fflush()?
+//
+// - errno?
+// - perror()?
+// - strncpy()?
+// - atoi()?
 
 struct Address {
     int id;
