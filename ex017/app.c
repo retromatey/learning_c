@@ -22,13 +22,20 @@
 //   - Closes an open stream, emptys internal data buffers.  Returns zero on
 //     success, EOF if an error is detected.
 //
-// - fread()?
+// - fread()
+// - fwrite()
+//   - stdio.h
+//   - Read/write data to a file.  
 //
-// - fwrite()?
+// - fflush()
+//   - stdio.h
+//   - Forces a write of all buffered data to the output stream.  Returns an EOF
+//     an error is detected, otherwise returns zero.
 //
-// - fflush()?
+// - errno
+//   - errno.h
+//   - An external variable used to hold error codes from library functions.
 //
-// - errno?
 // - perror()?
 // - strncpy()?
 // - atoi()?
