@@ -36,9 +36,18 @@
 //   - errno.h
 //   - An external variable used to hold error codes from library functions.
 //
-// - perror()?
-// - strncpy()?
-// - atoi()?
+// - perror()
+//   - errno.h
+//   - Produces an error message on standard error that describes the last error
+//     encountered when a system/library function failed.
+//
+// - strncpy()
+//   - string.h
+//   - Copies one string to another.
+//
+// - atoi()
+//   - stdlib.h
+//   - Converts a string to an int.
 
 struct Address {
     int id;
