@@ -1,0 +1,9 @@
+app.c: In function ‘main’:
+app.c:116:34: warning: passing argument 3 of ‘test_sorting’ from incompatible pointer type [-Wincompatible-pointer-types]
+  116 |     test_sorting(numbers, count, break_order);
+      |                                  ^~~~~~~~~~~
+      |                                  |
+      |                                  int (*)(int,  int,  int)
+app.c:76:55: note: expected ‘compare_cb’ {aka ‘int (*)(int,  int)’} but argument is of type ‘int (*)(int,  int,  int)’
+   76 | void test_sorting(int *numbers, int count, compare_cb cmp) {
+      |                                            ~~~~~~~~~~~^~~
