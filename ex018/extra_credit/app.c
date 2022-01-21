@@ -25,6 +25,38 @@ typedef int (*compare_cb) (int a, int b);
 
 typedef int *(*sort_cb) (int *numbers, int count, compare_cb cmp);
 
+int *selection_sort(int *numbers, int count, compare_cb cmp) {
+    int temp = 0;
+    int i = 0;
+    int j = 0;
+    int swap_index = 0;
+    int array_size = count * sizeof(int);
+    int *numbers_copy = malloc(array_size);
+
+    if (!numbers_copy) {
+        die("Memory error.");
+    }
+
+    memcpy(numbers_copy, numbers, array_size);
+
+    for (i = 0; i < count; i++) {
+        swap_index = i;
+
+        for (j = i+1; j < count; j++) {
+
+            if (cmp(numbers_copy[swap_index], numbers_copy[j]) > 0) {
+                swap_index = j;
+            }
+        }
+
+        temp = numbers_copy[i];
+        numbers_copy[i] = numbers_copy[swap_index];
+        numbers_copy[swap_index] = temp;
+    }
+
+    return numbers_copy;
+}
+
 // A classic bubble sort function that uses the compare_cb to do the sorting.
 int *bubble_sort(int *numbers, int count, compare_cb cmp) {
     int temp = 0;
@@ -59,16 +91,6 @@ int sorted_order(int a, int b) {
 
 int reverse_order(int a, int b) {
     return b - a;
-}
-
-int strange_order(int a, int b) {
-
-    if (a == 0 || b == 0) {
-        return 0;
-
-    } else {
-        return a % b;
-    }
 }
 
 // Used to test that we are storing things correctly by doing the sort and
@@ -111,9 +133,19 @@ int main(int argc, char *argv[]) {
         numbers[i] = atoi(inputs[i]);
     }
 
+    printf("Sorted order | bubble sort\n");
     test_sorting(numbers, count, sorted_order, bubble_sort);
+
+    printf("Sorted order | selection sort\n");
+    test_sorting(numbers, count, sorted_order, selection_sort);
+
+    printf("\n");
+
+    printf("Reverse order | bubble sort\n");
     test_sorting(numbers, count, reverse_order, bubble_sort);
-    test_sorting(numbers, count, strange_order, bubble_sort);
+
+    printf("Reverse order | selection sort\n");
+    test_sorting(numbers, count, reverse_order, selection_sort);
 
     free(numbers);
 
