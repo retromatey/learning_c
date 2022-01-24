@@ -1,4 +1,4 @@
-CFLAGS=-Wall -g
+CFLAGS=-Wall -g -DNDEBUG
 
 all:
 	$(CC) $(CFLAGS) app.c -o app.exe
