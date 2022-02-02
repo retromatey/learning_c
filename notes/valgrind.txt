@@ -1,0 +1,14 @@
+# Install valgrind
+sudo apt install valgrind
+
+# Leak check with full description (get sample output)
+valgrind --leak-check=full ./app.exe 
+
+# Leak check with summary description (get sample output)
+valgrind --leak-check=summary ./app.exe 
+
+# Leak check with full description output to a file
+valgrind --leak-check=full --log-file=log ./app.exe 
+
+# Leak check with an app that takes args
+valgrind --leak-check=full ./app.exe 2 3 1 0

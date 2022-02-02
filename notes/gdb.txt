@@ -1,0 +1,2 @@
+# Run gdb and supply args to the executable
+gdb --args ./app.exe 1 2 3

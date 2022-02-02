@@ -1,0 +1,2 @@
+# Output make results to a file
+make all 2> out.txt
