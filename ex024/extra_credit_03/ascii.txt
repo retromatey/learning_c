@@ -1,0 +1,8 @@
+Dec Char                     
+─────────────────────────────
+0   NUL '\0' (null character)
+9   HT  '\t' (horizontal tab)
+10  LF  '\n' (new line)      
+13  CR  '\r' (carriage ret)  
+27  ESC (escape)             
+32  SPACE                    
