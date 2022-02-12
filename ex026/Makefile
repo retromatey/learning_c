@@ -1,4 +1,4 @@
-CFLAGS=-Wall -g -DNDEBUG
+CFLAGS=-Wall -g
 
 all:
 	$(CC) $(CFLAGS) app.c -o app.exe
@@ -7,4 +7,4 @@ clean:
 	rm -f app.exe
 
 run:
-	./app.exe
+	./test-args.sh
