@@ -13,6 +13,12 @@ int main(int argc, char *argv[]) {
     int total_search_terms = 0;
     char **search_terms = NULL;
     bool is_or = false;
+    char **search_files = NULL;
+
+    /***************************************************************************
+     * Read in search terms, determine if the search is 'and' or 'or'.
+     **************************************************************************/
+    printf("\nReading search terms...\n");
 
     for (i = 1; i < argc; i++) {
 
@@ -44,6 +50,41 @@ int main(int argc, char *argv[]) {
     }
 
 
+    /***************************************************************************
+     * Generate list of searchable files.
+     **************************************************************************/
+    printf("\nDetermining searchable files\n");
+
+    debug("Attempting to open file ~/.logfind for reading");
+
+    char file_path[90] = { 0 };
+    const char *home_dir = getenv("HOME");
+    check(home_dir != NULL, "Cannot determine home directory.");
+    //debug("home_dir: %s", home_dir);
+    strcat(file_path, home_dir);
+    strcat(file_path, "/.logfind");
+    //debug("file_path: %s", file_path);
+
+    FILE *logfind_file = fopen(file_path, "r");
+    check(logfind_file != NULL, "Failed to open file.");
+
+    char line[90];
+    debug("Read ~/.logfind contents:");
+
+    while (feof(logfind_file) == 0) {
+        fgets(line, 90, logfind_file);
+
+        if (feof(logfind_file) == 0) {
+            printf("\t%s", line);
+        }
+    }
+
+    int close_file_status = fclose(logfind_file);
+    check(close_file_status == 0, "Failed to close file.");
+
+    /***************************************************************************
+     * Free allocated memory.
+     **************************************************************************/
     free(search_terms);
 
     return 0;
