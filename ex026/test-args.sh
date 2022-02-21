@@ -1,2 +1,2 @@
 #!/bin/bash
-./app.exe one two three
+./app.exe int
