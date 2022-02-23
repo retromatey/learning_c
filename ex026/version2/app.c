@@ -160,6 +160,42 @@ error:
     return -1;
 }
 
+int scan_file(char *filename, struct Logfind_model *model) {
+    int i = 0;
+    int line_number = 0;
+    int close_file_status = 0;
+    char *match;
+    char line[250];
+
+    FILE *search_file = fopen(filename, "r");
+    check(search_file != NULL, "Failed to open file.");
+
+    while (feof(search_file) == 0) {
+        fgets(line, 250, search_file);
+
+        if (feof(search_file) == 0) {
+
+            for (i = 0; i < model->total_search_terms; i++) {
+                match = strstr(line, model->search_terms[i]);
+
+                if (match != NULL) {
+                    printf("%s[%d]: %s", filename, line_number, line);
+                }
+            }
+
+            line_number += 1;
+        }
+    }
+
+    close_file_status = fclose(search_file);
+    check(close_file_status == 0, "Failed to close file.");
+
+    return 0;
+
+error:
+    return -1;
+}
+
 int main(int argc, char *argv[]) {
     int is_valid = validate(argc, argv);
     check(is_valid == 0, "Error found, terminating program");
@@ -171,6 +207,8 @@ int main(int argc, char *argv[]) {
     check(search_file_result == 0, "Error: search files not resolved");
 
     Logfind_model_summary(model);
+
+    scan_file(model->search_files[0], model);
 
     Logfind_model_destroy(model);
 

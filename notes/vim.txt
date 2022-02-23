@@ -1,0 +1,5 @@
+To fold all methods in a c file:
+:set foldmethod=syntax
+
+zo - opens a fold
+zc - close a fold

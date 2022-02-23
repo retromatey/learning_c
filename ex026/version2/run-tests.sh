@@ -2,13 +2,13 @@
 
 echo ""
 echo "TEST: 2 args, no options"
-echo "./app.exe one two"
-./app.exe one two
+echo "./app.exe int void"
+./app.exe int void
 
 echo ""
 echo "TEST: 2 args with -o option"
-echo "./app.exe -o one two"
-./app.exe -o one two
+echo "./app.exe -o int void"
+./app.exe -o int void
 
 echo ""
 echo "TEST: no args"
