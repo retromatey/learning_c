@@ -160,7 +160,7 @@ error:
     return -1;
 }
 
-int scan_file(char *filename, struct Logfind_model *model) {
+int scan_file_or(char *filename, struct Logfind_model *model) {
     int i = 0;
     int line_number = 0;
     int close_file_status = 0;
@@ -196,7 +196,62 @@ error:
     return -1;
 }
 
+int scan_file_and(char *filename, struct Logfind_model *model) {
+    int i = 0;
+    int line_number = 0;
+    int close_file_status = 0;
+    char *match;
+    char line[250];
+    int matches[model->total_search_terms];
+    int all_match = 1;
+
+    FILE *search_file = fopen(filename, "r");
+    check(search_file != NULL, "Failed to open file.");
+
+    for (i = 0; i < model->total_search_terms; i++) {
+        matches[i] = 0;
+    }
+
+    while (feof(search_file) == 0) {
+        fgets(line, 250, search_file);
+
+        if (feof(search_file) == 0) {
+
+            for (i = 0; i < model->total_search_terms; i++) {
+                match = strstr(line, model->search_terms[i]);
+
+                if (match != NULL) {
+                    matches[i] += 1;
+                }
+            }
+
+            line_number += 1;
+        }
+    }
+
+    for (i = 0; i < model->total_search_terms; i++) {
+
+        if (matches[i] == 0) {
+            all_match = 0;
+            break;
+        } 
+    }
+
+    if (all_match == 1) {
+        printf("All search terms found in %s\n", filename);
+    }
+
+    close_file_status = fclose(search_file);
+    check(close_file_status == 0, "Failed to close file.");
+
+    return 0;
+
+error:
+    return -1;
+}
+
 int main(int argc, char *argv[]) {
+    int i = 0;
     int is_valid = validate(argc, argv);
     check(is_valid == 0, "Error found, terminating program");
 
@@ -208,7 +263,15 @@ int main(int argc, char *argv[]) {
 
     Logfind_model_summary(model);
 
-    scan_file(model->search_files[0], model);
+    for (i = 0; i < model->total_search_files; i++) {
+
+        if (model->is_or) {
+            scan_file_or(model->search_files[i], model);
+
+        } else {
+            scan_file_and(model->search_files[i], model);
+        }
+    }
 
     Logfind_model_destroy(model);
 
