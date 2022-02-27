@@ -9,7 +9,7 @@ TEST_SRC=$(wildcard tests/*_tests.c)
 TESTS=$(patsubst %.c,%,$(TEST_SRC))
 
 TARGET=build/libYOUR_LIBRARY.a
-SO_TARGET=$(patsubst %.d,%.so,$(TARGET))
+SO_TARGET=$(patsubst %.a,%.so,$(TARGET))
 
 # The Target Build
 all: $(TARGET) $(SO_TARGET) tests
@@ -21,6 +21,7 @@ $(TARGET): CFLAGS += -fPIC
 $(TARGET): build $(OBJECTS)
 	ar rcs $@ $(OBJECTS)
 	ranlib $@
+
 $(SO_TARGET): $(TARGET) $(OBJECTS)
 	$(CC) -shared -o $@ $(OBJECTS)
 
@@ -37,7 +38,7 @@ tests: $(TESTS)
 # The Cleaner
 clean:
 	rm -rf build $(OBJECTS) $(TESTS)
-	rm -f test/tests.log
+	rm -f tests/tests.log 
 	find . -name "*.gc*" -exec rm {} \;
 	rm -rf `find . -name "*.dSYM" -print`
 
@@ -49,5 +50,6 @@ install: all
 # The Checker
 check:
 	@echo Files with potentially dangerous functions.
-	@egrep '[^_.>a-zA-Z0-9] (str(n?cpy|n?cat|xfrm|n?dup|str|pbrk|tok|_)\
+	@egrep '[^_.>a-zA-Z0-9](str(n?cpy|n?cat|xfrm|n?dup|str|pbrk|tok|_)\
 		|stpn?cpy|a?sn?printf|byte_)' $(SOURCES) || true
+
