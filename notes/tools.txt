@@ -1,0 +1,13 @@
+The nm command will list out the functions of a .o file
+
+nm libex29.o 
+
+                 U _GLOBAL_OFFSET_TABLE_
+0000000000000103 T fail_on_purpose
+0000000000000099 T lowercase
+0000000000000000 T print_a_message
+                 U printf
+                 U putchar
+                 U tolower
+                 U toupper
+000000000000002f T uppercase
